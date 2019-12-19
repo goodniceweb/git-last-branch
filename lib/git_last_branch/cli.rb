@@ -16,7 +16,19 @@ module GitLastBranch
       require_relative 'version'
       puts "v#{GitLastBranch::VERSION}"
     end
-    map %w(--version -v) => :version
+    map %w[--version -v] => :version
+
+    desc 'go_last', 'Command description...'
+    method_option :help, aliases: '-h', type: :boolean,
+                         desc: 'Display usage information'
+    def go_last(*)
+      if options[:help]
+        invoke :help, ['go_last']
+      else
+        require_relative 'commands/go_last'
+        GitLastBranch::Commands::GoLast.new(options).execute
+      end
+    end
 
     desc 'show_list', 'Command description...'
     method_option :help, aliases: '-h', type: :boolean,
