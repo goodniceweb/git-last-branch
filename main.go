@@ -1,38 +1,32 @@
 package main
 
-import (
-	"fmt"
-	"os/exec"
+// TODO: [must] automated tests
+// TODO: [must] default limit for amount of branches
+// TODO: [feature] highlight current branch
+// TODO: [feature] settings - limit for tons of branches
+// TODO: [feature] cli arguments for overriding settings
+// TODO: [refactor] move magic literals to config
+// TODO: [nice-to-have] verbose error vs regular mode
+// TODO: [final] test and build for linux/mac/windows
 
-	"github.com/manifoldco/promptui"
-)
-
-func main () {
+func main() {
 	gitExec := "git"
-	gitArg0 := "for-each-ref"
-	gitArg1 := "--sort='-authordate'"
-	gitArg2 := "--format='%(refname)(objectname:short)(authordate)'"
-	gitArg3 := "refs/heads"
-	cmd := exec.Command(gitExec, gitArg0, gitArg1, gitArg2, gitArg3)
-	stdout, err := cmd.Output()
-
-	if err != nil {
-		fmt.Println("fatal: not a git repository")
-		return
+	currentPathArgs := []string{
+		"-C",
+		getCurrentPath(),
 	}
-	fmt.Println(string(stdout))
-
-	prompt := promptui.Select{
-		Label: "Select Day",
-		Items: []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-			"Saturday", "Sunday"},
+	lastBranchArgs := []string{
+	  "for-each-ref",
+	  "--sort",
+	  "-authordate",
+	  "--format",
+	  "%(refname)\t%(objectname:short)\t%(authordate)",
+	  "refs/heads",
 	}
-	_, result, err := prompt.Run()
-
-	if err != nil {
-		fmt.Printf("Prompt failed %v\n", err)
-		return
-	}
-
-	fmt.Printf("You choose %q\n", result)
+	mainGitArgs := append(currentPathArgs, lastBranchArgs...)
+	rawBranches := getRawBranches(gitExec, mainGitArgs)
+	branches := BuildBranches(rawBranches)
+	selectedBranch := getSelectedBranch(branches)
+	switchBranchGitArgs := append(currentPathArgs, "checkout", selectedBranch)
+	switchToBranch(gitExec, switchBranchGitArgs)
 }
