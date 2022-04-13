@@ -22,15 +22,15 @@ func (branches gitBranches) Map(f func(gitBranch) string) []string {
 	return vsm
 }
 
-func GetFormattedOutput(branch gitBranch, branches gitBranches) string {
+func getFormattedOutput(branch gitBranch, branches gitBranches) string {
 	allBranches := branches.Map(func (b gitBranch) string {
 		return b.Branch
 	})
 	return text.AlignLeft.Apply(branch.Branch, len(longestStringIn(allBranches)) + 2) + branch.AuthorDate
 }
 
-func BuildBranches(rawBranches []string) []gitBranch {
-	branchesStruct := make([]gitBranch, len(rawBranches))
+func BuildBranches(rawBranches []string) gitBranches {
+	branchesStruct := make(gitBranches, len(rawBranches))
 	for i, b := range rawBranches {
 		parts := strings.Split(b, "\t")
 		branchesStruct[i].Branch = strings.Replace(parts[0], "refs/heads/", "", 1)
@@ -38,7 +38,7 @@ func BuildBranches(rawBranches []string) []gitBranch {
 		branchesStruct[i].AuthorDate = parts[2]
 	}
 	for i, b := range branchesStruct {
-		branchesStruct[i].Text = GetFormattedOutput(b, branchesStruct)
+		branchesStruct[i].Text = getFormattedOutput(b, branchesStruct)
 	}
 	return branchesStruct
 }

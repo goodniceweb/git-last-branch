@@ -23,7 +23,7 @@ func getRawBranches(gitExec string, mainGitArgs []string) []string {
 }
 
 func switchToBranch(gitExec string, gitArgs []string) {
-	cmd2 := exec.Command(gitExec, gitArgs...)
-	stdouterr, _ := cmd2.CombinedOutput()
+	cmd := exec.Command(gitExec, gitArgs...)
+	stdouterr, _ := cmd.CombinedOutput()
 	fmt.Println(string(stdouterr))
 }
