@@ -26,7 +26,9 @@ func getFormattedOutput(branch gitBranch, branches gitBranches) string {
 	allBranches := branches.Map(func (b gitBranch) string {
 		return b.Branch
 	})
-	return text.AlignLeft.Apply(branch.Branch, len(longestStringIn(allBranches)) + 2) + branch.AuthorDate
+	return text.AlignLeft.Apply(branch.Branch, len(longestStringIn(allBranches)) +
+		int(globalConfig.SpacesBetweenColumns)) +
+		branch.AuthorDate
 }
 
 func BuildBranches(rawBranches []string) gitBranches {

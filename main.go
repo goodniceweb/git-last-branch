@@ -1,13 +1,16 @@
 package main
 
-// TODO: [must] automated tests
-// TODO: [must] default limit for amount of branches
 // TODO: [feature] highlight current branch
 // TODO: [feature] settings - limit for tons of branches
 // TODO: [feature] cli arguments for overriding settings
 // TODO: [refactor] move magic literals to config
 // TODO: [nice-to-have] verbose error vs regular mode
 // TODO: [final] test and build for linux/mac/windows
+
+var globalConfig config = config{
+	AmountOfBranches: 5,
+	SpacesBetweenColumns: 2,
+}
 
 func main() {
 	gitExec := "git"
