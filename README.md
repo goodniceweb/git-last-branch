@@ -2,6 +2,8 @@
 
 The plugin simplifies an access to recent branches:
 
+![git-last-branch-demo](https://user-images.githubusercontent.com/5359832/176028834-bd2d74dd-4de5-486b-b399-f6bf88969a78.gif)
+
 ## Pre-requirements
 
 Pre-requirement for this is golang >= 1.17
