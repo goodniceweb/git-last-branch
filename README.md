@@ -35,4 +35,5 @@ git config --global alias.lbr '!git-last-branch'
 rm ~/bin/git-last-branch
 ```
 
-Also, please don't forget to edit your `~/.gitconfig` file and remove the `lbr` alias.
+Also, please don't forget to edit your `~/.gitconfig` file and
+remove the `lbr` alias.
