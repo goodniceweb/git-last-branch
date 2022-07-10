@@ -21,9 +21,9 @@ func main() {
 	lastBranchArgs := []string{
 	  "for-each-ref",
 	  "--sort",
-	  "-authordate",
+	  "-committerdate",
 	  "--format",
-	  "%(refname)\t%(objectname:short)\t%(authordate)",
+	  "%(refname)\t%(objectname:short)\t%(committerdate)",
 	  "refs/heads",
 	}
 	mainGitArgs := append(currentPathArgs, lastBranchArgs...)
