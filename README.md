@@ -36,9 +36,7 @@ fish_add_path ~/bin
 ```
 git clone https://github.com/goodniceweb/git-last-branch.git
 cd git-last-branch
-make
-mv dist/git-last-branch ~/bin/
-git config --global alias.lbr '!git-last-branch'
+make && make install
 ```
 
 ## Uninstall
