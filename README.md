@@ -12,22 +12,32 @@ Also, please ensure you have a custom folder in your home directory
 where you can put the executable. In the example below it's `bin`:
 
 ```
-mkdir ~/bin
-echo 'export PATH=$PATH:~/bin' >> ~/.bashrc # or .zshrc or .fishrc
+mkdir -p ~/bin
+```
+
+### bash or zsh
+
+```
+echo 'export PATH=$PATH:~/bin' >> ~/.bashrc # or .zshrc
 ```
 
 Feel free to skip this step if you already have such a folder.
+
+### fish
+
+```
+fish_add_path ~/bin
+```
 
 ## Install
 
 ### Build from source
 
-
 ```
 git clone https://github.com/goodniceweb/git-last-branch.git
 cd git-last-branch
-go build
-mv main ~/bin/git-last-branch
+make
+mv dist/git-last-branch ~/bin/
 git config --global alias.lbr '!git-last-branch'
 ```
 
