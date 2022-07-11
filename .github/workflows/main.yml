@@ -11,5 +11,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
       - name: go-cross-build
         uses: thatisuday/go-cross-build@v1.1.0
+        with:
+          platforms: 'linux/amd64, darwin/amd64, windows/amd64'
+          name: 'git-last-branch'
+          compress: 'false'
+          dest: 'dist'
